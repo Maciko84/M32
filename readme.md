@@ -96,26 +96,26 @@ The following instructions are available in the `M32` bytecode:
 - **0x10** - **jmp**  
   Pops a value from the stack and sets the program counter (PC) to this value.  
   *Syntax:*  
-  `jmp <address>`  
+  `jmp`  
   *Example:*  
-  `jmp 100`
+  `push 100`
+  
+  `jmp`
 
 - **0x11** - **cjmp**  
   Pops two values from the stack. The first value is used as a condition, and the second value is used as the target address. If the condition value is non-zero, sets the program counter (PC) to the target address.  
   *Syntax:*  
-  `cjmp <condition> <address>`  
-  *Example:*  
-  `cjmp 1 100`
+  `cjmp`
 
 - **0x12** - **store**  
   Pops two values from the stack: the first is the address and the second is the value. Stores the value in the specified memory address.  
   *Syntax:*  
-  `store <address> <value>`
+  `store`
 
 - **0x13** - **load**  
   Pops an address from the stack and pushes the value stored at that address in memory.  
   *Syntax:*  
-  `load <address>`
+  `load`
 
 - **0x14** - **pop**  
   Pops a value from the stack and discards it.  
@@ -125,9 +125,23 @@ The following instructions are available in the `M32` bytecode:
 - **0x15** - **custom**  
   Pops an identifier from the stack and executes a custom instruction associated with that identifier.  
   *Syntax:*  
-  `custom <id>`
+  `custom`
 
   (default customs are documented in the `Default Customs` section)
+
+- **0x16** - **call**
+
+  pops a adress from the stack and jumps to it, leaving the next instruction's adress on the call stack.  
+  *Syntax:*
+
+  `call`
+
+- **0x17** - **ret**
+  
+  pops a adress from the call stack and jumps to it.
+
+  *Syntax*: 
+  `ret`
 
 ## Assembly Syntax
 
@@ -148,7 +162,7 @@ The data section defines data values to be loaded into memory. The data section 
   *Example:*  
   `char 'A'`
   
-  **note:** the whitespace and tab characters must be defined using the `number` instruction followed by the ascii value.
+  **note:** any whitespace must be defined using the `number` instruction followed by the ascii value.
 
 ### Text Section
 

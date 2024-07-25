@@ -43,6 +43,8 @@ namespace M32_CORE
                 instructions.Add(data.ReadByte());
             }
 
+            Stack<int> callStack = new();
+
             int pc = 0; // program counter
             while (pc < instructions.Count)
             {
@@ -167,6 +169,23 @@ namespace M32_CORE
                             throw new Exception($"Cannot find custom operation #{id}!");
                         }
                         customInstructions[id](mem, stack);
+                        break;
+
+                    case 0x16: // call
+                        if(stack.Count < 1)
+                        {
+                            throw new Exception("Stack underflow.");
+                        }
+
+                        callStack.Push(pc + 1);
+                        pc = stack.Pop();
+                        break;
+
+                    case 0x17: // ret
+                        if(callStack.Count > 1)
+                        {
+                            pc = callStack.Pop();
+                        }
                         break;
 
                     default:
