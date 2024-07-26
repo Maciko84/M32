@@ -38,7 +38,7 @@ namespace M32_CORE
         {
             // Read all instructions into a list
             List<byte> instructions = new();
-            while (data.PeekChar() != -1)
+            while (data.BaseStream.Position < data.BaseStream.Length)
             {
                 instructions.Add(data.ReadByte());
             }
