@@ -3,13 +3,14 @@
 char 'I' ; #0
  
 .text
-
 ; initialize a counter
 push 10
 push 1
 store
 
-; print I (adress #11)
+
+; print I
+start:
 push 0
 load
 push 3
@@ -25,7 +26,7 @@ store
 
 ; jump to the beginning if the counter is 0
 
-push 11
+push start
 
 push 1
 load
