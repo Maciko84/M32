@@ -166,7 +166,9 @@ The data section defines data values to be loaded into memory. The data section 
 
 ### Text Section
 
-The text section defines the bytecode instructions. The text section starts with `.text` and contains the instructions like in the syntax provided in the `Instructions` section of the document.
+The text section defines the bytecode instructions. The text section starts with `.text` and contains the instructions like in the syntax provided in the `Instructions` section of the document. Aslo it contains some extra things:
+- `%set name integerValue` - declares a identifier with given value  
+- `my_label:` - declares a label (works like %set my_label `<adress>`)
 
 ## Default Customs
 The default runtime for the `m32` vm (the `m32` command) includes some simple customs for i/o:
